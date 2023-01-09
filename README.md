@@ -17,7 +17,12 @@ cd Wa.me-Url-Generator-API
 
 # Install modules
 go mod tidy
+
+# Create the env file
+touch .env
 ```
+_**Note:** Read the [.env.example](.env.example) file_
+
 ### 2 - Run the project
 ```shell
 # Run the project
@@ -39,4 +44,19 @@ curl -XPOST -H "Content-type: application/json" -d '{
 
 # Response: {"status":"success", "data":{"contact-phone":"+12225556666","msg":"Hello World!","url":"https://wa.me/+12225556666?text=Hello%20World!"}}
 # Generated Url: https://wa.me/+12225556666?text=Hello%20World!
+```
+
+## Env Variables
+```shell
+# .env file
+
+# CONFIG
+PORT=3000
+
+# CORS
+ALLOWED_ORIGINS="*"
+# EXAMPLE:
+# ALLOWED_ORIGINS="http://localhost,https://some.domain.com,https://another.domain.com"
+# result array: ["http://localhost", "https://some.domain.com", "https://another.domain.com"]
+
 ```

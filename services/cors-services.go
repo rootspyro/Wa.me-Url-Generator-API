@@ -1,7 +1,6 @@
 package services
 
 import (
-	"log"
 	"strings"
 )
 
@@ -16,7 +15,7 @@ func NewCORSServices() *CORSServices {
 func( cs *CORSServices )ListAllowedOrigins( origins string ) []string {
 
 	corsOrigins := strings.Split(origins, ",")
-	log.Println(corsOrigins)
+
 	return corsOrigins
 
 }
