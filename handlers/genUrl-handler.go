@@ -40,7 +40,7 @@ func( h *GenUrlHandler )Handle(c *gin.Context) {
 
 		errResponse := &models.Default{
 			Status: "error",
-			Data: "Invalid phone number format! Avoid spaces and special characters, except for the `+` character in the international code.",
+			Data: "Invalid phone number format! Avoid spaces and special characters.",
 		}
 
 		c.JSON(500, errResponse)
