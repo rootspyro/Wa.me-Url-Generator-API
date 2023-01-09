@@ -17,10 +17,6 @@ cd Wa.me-Url-Generator-API
 
 # Install modules
 go mod tidy
-
-# Create Env File
-touch .env
-echo "PORT=3000" >> .env # 3000 as example port number
 ```
 ### 2 - Run the project
 ```shell
