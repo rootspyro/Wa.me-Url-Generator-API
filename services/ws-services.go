@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 	"wsurl-creator-api/models"
 )
@@ -10,6 +11,26 @@ type WSServices struct {}
 
 func NewWsServices() *WSServices{
 	return &WSServices{}
+}
+ 
+func( ws *WSServices )ValidateNumberFormat(phoneNumber string) bool {
+
+	/*
+		This function validates the correct format of phone number
+		
+		bad: +1 (xxx)-xxx-xxxx 
+		bad: +1 xxx-xxx-xxxx 
+		bad: 1 xxx-xxx-xxxx 
+
+		good: +1xxxxxxxxxx
+		good: 1xxxxxxxxxx
+
+	*/
+
+	
+	validator := regexp.MustCompile(`^(\+?)[0-9]{10,15}`)
+	
+	return validator.MatchString(phoneNumber)
 }
 
 // this function parse the original message to an url format "Hello world" -> "Hello%20World"
@@ -20,7 +41,10 @@ func( ws *WSServices )FormatMessage(oMessage string) string{
 	data := strings.Split(oMessage, " ")
 
 	for i := range data {
-		formatedMessage += data[i] + "%20"
+		formatedMessage += data[i] 
+		if i < len(data) - 1 {
+			formatedMessage += "%20"
+		}
 	}
 
 	return formatedMessage
@@ -35,3 +59,5 @@ func( ws *WSServices )CreateUrl(body *models.GenerateURLBody) string {
 
 	return url
 }
+
+
