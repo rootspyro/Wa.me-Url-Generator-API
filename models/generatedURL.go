@@ -9,5 +9,5 @@ type UrlData struct {
 
 type GeneratedURLResponse struct { 
 	Status string `json:"status"`
-	Data *UrlData 
+	Data *UrlData	`json:"data"`
 }
