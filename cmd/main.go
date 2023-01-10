@@ -21,6 +21,19 @@ func main(){
 	wsServices := services.NewWsServices()
 	corsServices := services.NewCORSServices()
 
+	corsOrigins := corsServices.ListAllowedOrigins(os.Getenv("ALLOWED_ORIGINS"))
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     corsOrigins,
+    AllowMethods:     []string{"GET","POST"},
+    AllowHeaders:     []string{"Origin"},
+    ExposeHeaders:    []string{"Content-Length"},
+    AllowCredentials: true,
+    AllowOriginFunc: func(origin string) bool {
+      return origin == "https://github.com"
+    },
+	}))
+
 	// Setup Handlers
 
 	v1 := r.Group("/api/v1") 
@@ -30,11 +43,6 @@ func main(){
 
 
 	// Setup CORS Policy
-	corsOrigins := corsServices.ListAllowedOrigins(os.Getenv("ALLOWED_ORIGINS"))
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = corsOrigins
-
-	r.Use(cors.New(corsConfig))
 
 	r.Run()
 }
