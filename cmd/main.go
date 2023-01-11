@@ -22,16 +22,13 @@ func main(){
 	corsServices := services.NewCORSServices()
 
 	corsOrigins := corsServices.ListAllowedOrigins(os.Getenv("ALLOWED_ORIGINS"))
-
+	_ = corsOrigins
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     corsOrigins,
+		AllowOrigins:     []string{"*"},
     AllowMethods:     []string{"GET","POST"},
-    AllowHeaders:     []string{"Origin"},
+    AllowHeaders:     []string{"Origin","Content-Type"},
     ExposeHeaders:    []string{"Content-Length"},
     AllowCredentials: true,
-    AllowOriginFunc: func(origin string) bool {
-      return origin == "https://github.com"
-    },
 	}))
 
 	// Setup Handlers
