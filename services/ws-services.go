@@ -28,7 +28,7 @@ func( ws *WSServices )ValidateNumberFormat(phoneNumber string) bool {
 	*/
 
 	
-	validator := regexp.MustCompile(`^(\+?)[0-9]{10,15}`)
+	validator := regexp.MustCompile(`^\+(?:[0-9]\x20?){6,14}[0-9]$`)
 	
 	return validator.MatchString(phoneNumber)
 }
